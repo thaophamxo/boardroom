@@ -1,0 +1,11 @@
+.g-puzzle .pz-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.g-puzzle .pz-top { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.g-puzzle .pz-time { font-variant-numeric: tabular-nums; min-width: 78px; text-align: center; }
+.g-puzzle .pz-stage { width: 100%; display: flex; justify-content: center; }
+.g-puzzle .pz-canvas {
+  display: block; background: var(--panel-2); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab;
+  max-width: 100%;
+}
+.g-puzzle .pz-canvas.drag { cursor: grabbing; }
+.g-puzzle .pz-loading { color: var(--muted); padding: 40px 0; text-align: center; }

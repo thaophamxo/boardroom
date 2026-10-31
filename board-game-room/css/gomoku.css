@@ -1,0 +1,12 @@
+.g-gomoku .gm-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.g-gomoku .gm-info { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.g-gomoku .gm-chip { font-weight: 700; border: 2px solid transparent; }
+.g-gomoku .gm-chip.active { border-color: var(--primary); background: var(--primary-softer); }
+.g-gomoku .gm-count { font-variant-numeric: tabular-nums; }
+.g-gomoku .gm-board {
+  width: min(100%, calc(100vh - 250px), 680px); min-width: 260px; aspect-ratio: 1;
+  border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #f8fbff;
+  box-shadow: var(--shadow); touch-action: manipulation; user-select: none; -webkit-user-select: none;
+}
+.g-gomoku .gm-svg { display: block; width: 100%; height: 100%; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+@media (max-width: 520px) { .g-gomoku .gm-board { width: 100%; border-radius: 8px; } }

@@ -1,0 +1,15 @@
+.g-go .go-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.g-go .go-info { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.g-go .go-chip { font-weight: 700; border: 2px solid transparent; }
+.g-go .go-chip.active { border-color: var(--primary); background: var(--primary-softer); }
+.g-go .go-score { padding: 8px 14px; text-align: center; font-variant-numeric: tabular-nums; }
+.g-go .go-score-row { font-size: 15px; }
+.g-go .go-score-lead { font-weight: 700; color: var(--primary-d); margin-top: 2px; }
+.g-go .go-score-hint { font-size: 12px; margin-top: 2px; }
+.g-go .go-board {
+  width: min(100%, calc(100vh - 250px), 680px); min-width: 260px; aspect-ratio: 1;
+  border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #dcecfa;
+  box-shadow: var(--shadow); touch-action: manipulation; user-select: none; -webkit-user-select: none;
+}
+.g-go .go-svg { display: block; width: 100%; height: 100%; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+@media (max-width: 520px) { .g-go .go-board { width: 100%; border-radius: 8px; } }

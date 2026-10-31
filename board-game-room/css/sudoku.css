@@ -1,0 +1,38 @@
+.g-sudoku .sd-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.g-sudoku .sd-top { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.g-sudoku .sd-time { font-variant-numeric: tabular-nums; min-width: 78px; text-align: center; }
+.g-sudoku .sd-board {
+  --sz: min(100%, calc(100vh - 360px), 540px);
+  width: max(240px, var(--sz)); aspect-ratio: 1; display: grid; grid-template-columns: repeat(9, 1fr);
+  border: 2px solid var(--text); border-radius: 8px; overflow: hidden; background: var(--panel);
+  box-shadow: var(--shadow); user-select: none; -webkit-user-select: none; touch-action: manipulation;
+  container-type: inline-size;
+}
+.g-sudoku .sd-cell {
+  position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer;
+  border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--panel);
+  color: var(--primary-d); font-size: 6cqw; font-weight: 500; min-width: 0;
+}
+.g-sudoku .sd-cell:nth-child(9n) { border-right: 0; }
+.g-sudoku .sd-cell:nth-last-child(-n+9) { border-bottom: 0; }
+.g-sudoku .sd-cell.br { border-right: 2px solid var(--text); }
+.g-sudoku .sd-cell.bb { border-bottom: 2px solid var(--text); }
+.g-sudoku .sd-cell.given { color: var(--text); font-weight: 700; background: var(--panel-2); }
+.g-sudoku .sd-cell.hl { background: var(--primary-softer); }
+.g-sudoku .sd-cell.same { background: var(--primary-soft); }
+.g-sudoku .sd-cell.sel { background: #b5d8f7; box-shadow: inset 0 0 0 2px var(--primary-d); }
+.g-sudoku .sd-cell.err, .g-sudoku .sd-cell.wrong { background: #fbe3e5; color: var(--danger); }
+.g-sudoku .sd-cell.wrong { box-shadow: inset 0 0 0 2px var(--danger); }
+.g-sudoku .notes { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; height: 100%; padding: 1px; box-sizing: border-box; }
+.g-sudoku .notes i { font-style: normal; font-size: 2.6cqw; line-height: 1; color: var(--muted); display: flex; align-items: center; justify-content: center; }
+.g-sudoku .sd-board.note-mode { box-shadow: 0 0 0 3px var(--primary-soft), var(--shadow); }
+.g-sudoku .sd-pad { display: grid; grid-template-columns: repeat(9, 1fr); gap: 6px; width: max(240px, min(100%, calc(100vh - 360px), 540px)); }
+.g-sudoku .sd-key {
+  display: flex; flex-direction: column; align-items: center; padding: 6px 0 3px; border: 1px solid var(--line);
+  border-radius: 10px; background: var(--panel); color: var(--primary-d); cursor: pointer; font-family: inherit;
+}
+.g-sudoku .sd-key:hover { background: var(--primary-softer); }
+.g-sudoku .sd-key:active { background: var(--primary-soft); }
+.g-sudoku .sd-key .n { font-size: 1.35rem; font-weight: 600; line-height: 1.1; }
+.g-sudoku .sd-key .rem { font-size: .65rem; color: var(--muted); }
+@media (max-width: 480px) { .g-sudoku .sd-pad { gap: 3px; } .g-sudoku .sd-key .n { font-size: 1.15rem; } }

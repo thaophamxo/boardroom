@@ -1,0 +1,213 @@
+/* Phòng Board Game – giao diện chung (xanh dương nhạt + trắng, dịu mắt) */
+:root {
+  --bg: #eef6fd;
+  --panel: #ffffff;
+  --panel-2: #f5faff;
+  --line: #d3e4f5;
+  --primary: #5aa5e8;
+  --primary-d: #3d8ad0;
+  --primary-soft: #cfe5fa;
+  --primary-softer: #e3f0fc;
+  --text: #2c4a66;
+  --muted: #7f98b0;
+  --good: #3fa37a;
+  --warn: #e0a13c;
+  --danger: #d9626a;
+  --shadow: 0 6px 20px rgba(60, 120, 180, .12);
+  --radius: 14px;
+  --font: "Segoe UI", "Be Vietnam Pro", system-ui, -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: linear-gradient(180deg, #e6f1fc 0%, #f4f9fe 45%, #ffffff 100%) fixed;
+  line-height: 1.45;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { margin: 0; font-weight: 700; }
+button { font-family: inherit; }
+.muted { color: var(--muted); }
+.row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.col { display: flex; flex-direction: column; gap: 10px; }
+.hidden { display: none !important; }
+
+/* ---------- thẻ & nút ---------- */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px;
+}
+.btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .15s, transform .08s, box-shadow .15s, border-color .15s;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 38px;
+  user-select: none;
+}
+.btn:hover { background: var(--primary-softer); border-color: var(--primary-soft); }
+.btn:active { transform: translateY(1px) scale(.98); }
+.btn:focus-visible, .seg button:focus-visible, .card:focus-visible, input:focus-visible { outline: 3px solid rgba(90,165,232,.45); outline-offset: 2px; }
+.btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: 0 3px 10px rgba(61,138,208,.28); }
+.btn.primary:hover { background: var(--primary-d); border-color: var(--primary-d); }
+.btn.ghost { background: transparent; border-color: transparent; color: var(--primary-d); }
+.btn.ghost:hover { background: var(--primary-softer); }
+.btn.small { font-size: 13px; padding: 5px 12px; min-height: 30px; }
+.btn.danger { color: var(--danger); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; transform: none; }
+.chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; font-weight: 600; color: var(--primary-d);
+  background: var(--primary-softer); border-radius: 999px; padding: 3px 10px;
+}
+
+/* ---------- khung trang ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px max(16px, env(safe-area-inset-right)) 10px max(16px, env(safe-area-inset-left));
+  background: rgba(255,255,255,.82);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; letter-spacing: .2px; }
+.brand { white-space: nowrap; }
+.brand .logo { width: 34px; height: 34px; border-radius: 10px; flex: none; }
+.topbar .grow { flex: 1; }
+.topbar h2 { font-size: 17px; }
+.page { max-width: 1100px; margin: 0 auto; padding: 18px 16px 40px; }
+
+/* ---------- sảnh ---------- */
+.hero { text-align: center; padding: 18px 0 8px; }
+.hero h1 { font-size: clamp(24px, 4.5vw, 34px); }
+.hero p { margin: 8px auto 0; max-width: 560px; color: var(--muted); }
+.grid {
+  display: grid; gap: 16px; margin-top: 22px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+.card {
+  appearance: none; text-align: left; cursor: pointer; font: inherit; color: inherit;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 18px;
+  padding: 18px; box-shadow: var(--shadow);
+  display: flex; flex-direction: column; gap: 10px;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
+  animation: rise .45s ease both;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(60,120,180,.2); border-color: var(--primary-soft); }
+.card:active { transform: translateY(-1px) scale(.99); }
+.card .ico {
+  width: 64px; height: 64px; border-radius: 18px;
+  background: linear-gradient(135deg, var(--primary-softer), var(--primary-soft));
+  display: grid; place-items: center; font-size: 34px; color: var(--primary-d);
+  font-family: "Noto Serif CJK SC", "Songti SC", "SimSun", serif;
+}
+.card .ico svg { width: 40px; height: 40px; }
+.card h3 { font-size: 20px; }
+.card .tag { color: var(--muted); font-size: 14px; min-height: 40px; }
+.card .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.card:nth-child(2) { animation-delay: .04s; } .card:nth-child(3) { animation-delay: .08s; }
+.card:nth-child(4) { animation-delay: .12s; } .card:nth-child(5) { animation-delay: .16s; }
+.card:nth-child(6) { animation-delay: .2s; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.foot { text-align: center; color: var(--muted); font-size: 13px; margin-top: 30px; }
+
+/* ---------- màn game ---------- */
+.statusbar {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 42px; padding: 8px 14px; margin-bottom: 10px;
+  border-radius: 12px; font-weight: 700; font-size: 16px;
+  background: var(--primary-softer); color: var(--primary-d);
+  transition: background .2s, color .2s;
+}
+.statusbar.good { background: #dff3ea; color: var(--good); }
+.statusbar.warn { background: #fdf0d9; color: #b27a1d; }
+.statusbar.bad { background: #fbe3e5; color: var(--danger); }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; margin-bottom: 12px; }
+.toolbar .sep { flex: 1 1 8px; }
+.game-root { width: 100%; min-height: 200px; }
+.net-badge { font-size: 12px; }
+
+/* ---------- hộp thoại ---------- */
+.overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(44, 74, 102, .32);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+  animation: fade .18s ease both; overflow-y: auto;
+}
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+  width: min(480px, 100%); max-height: calc(100vh - 32px); overflow-y: auto;
+  background: var(--panel); border-radius: 20px; padding: 22px;
+  box-shadow: 0 20px 50px rgba(40, 90, 140, .28);
+  animation: pop .22s cubic-bezier(.2,.9,.3,1.2) both;
+}
+@keyframes pop { from { opacity: 0; transform: scale(.94) translateY(8px); } to { opacity: 1; transform: none; } }
+.modal h2 { font-size: 21px; margin-bottom: 4px; }
+.modal .sub { color: var(--muted); margin-bottom: 14px; font-size: 14px; }
+.modal .actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 18px; }
+.modal.result .big { font-size: 46px; text-align: center; margin: 4px 0; }
+.modal.result h2 { text-align: center; }
+.modal.result p { text-align: center; margin: 6px 0 0; }
+.modal.result.win h2 { color: var(--good); }
+.modal.result.lose h2 { color: var(--danger); }
+.modal.result.draw h2 { color: var(--primary-d); }
+.modal.result .actions { justify-content: center; }
+.field { margin-top: 14px; }
+.field > label, .field > .lbl { display: block; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .4px; }
+.seg { display: flex; background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 3px; gap: 3px; }
+.seg button {
+  flex: 1; appearance: none; border: 0; background: transparent; color: var(--text);
+  font-size: 14px; font-weight: 600; padding: 8px 6px; border-radius: 9px; cursor: pointer;
+  transition: background .15s, color .15s, box-shadow .15s; min-height: 36px;
+}
+.seg button:hover { background: var(--primary-softer); }
+.seg button.on { background: var(--primary); color: #fff; box-shadow: 0 2px 6px rgba(61,138,208,.3); }
+input.text {
+  width: 100%; font: inherit; font-size: 22px; font-weight: 800; letter-spacing: 6px; text-align: center; text-transform: uppercase;
+  padding: 10px; border: 2px solid var(--line); border-radius: 12px; background: var(--panel-2); color: var(--text);
+}
+input.text:focus { border-color: var(--primary); outline: none; }
+.codebox { text-align: center; padding: 14px; background: var(--primary-softer); border-radius: 14px; margin-top: 12px; }
+.codebox .code { font-size: 40px; font-weight: 800; letter-spacing: 10px; color: var(--primary-d); padding-left: 10px; }
+.codebox .link { font-size: 12px; color: var(--muted); word-break: break-all; margin-top: 4px; }
+.spinner { width: 18px; height: 18px; border-radius: 50%; border: 3px solid var(--primary-soft); border-top-color: var(--primary); animation: spin .8s linear infinite; display: inline-block; vertical-align: -3px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.err { color: var(--danger); font-size: 14px; margin-top: 10px; }
+
+/* ---------- toast ---------- */
+#toasts { position: fixed; left: 0; right: 0; bottom: 20px; z-index: 200; display: flex; flex-direction: column; align-items: center; gap: 8px; pointer-events: none; padding: 0 16px; }
+.toast {
+  background: #2c4a66; color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 14px; font-weight: 600;
+  box-shadow: 0 8px 22px rgba(30,60,90,.3); animation: toastin .25s ease both; max-width: 100%;
+}
+.toast.out { animation: toastout .3s ease both; }
+@keyframes toastin { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes toastout { to { opacity: 0; transform: translateY(8px); } }
+
+@media (max-width: 560px) {
+  .page { padding: 12px 12px 32px; }
+  .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .card { padding: 14px; }
+  .card .tag { display: none; }
+  .card h3 { font-size: 17px; }
+  .card .ico { width: 52px; height: 52px; font-size: 28px; }
+  .brand span.name { font-size: 15px; }
+  .topbar { gap: 6px; padding-left: 12px; padding-right: 12px; }
+  .topbar .btn.small { padding: 5px 9px; }
+  .toolbar .btn { padding: 8px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0s !important; transition-duration: .001ms !important; }
+}
